@@ -1,0 +1,11 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizz:item/wisdom_seed0"
+  },
+  "overrides" : [
+    { "predicate" :  { "wizz:fullness" :  1.0 }, "model": "wizz:item/wisdom_seed1" },
+    { "predicate" :  { "wizz:fullness" :  2.0 }, "model": "wizz:item/wisdom_seed2" },
+    { "predicate" :  { "wizz:fullness" :  3.0 }, "model": "wizz:item/wisdom_seed3" }
+  ]
+}

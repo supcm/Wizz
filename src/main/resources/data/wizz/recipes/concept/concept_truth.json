@@ -1,0 +1,22 @@
+{
+  "type": "wizz:concept",
+  "level": 3,
+  "ingredients": [
+    {
+      "item": "wizz:bal"
+    },
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "item": "wizz:reflective_surface"
+    },
+    {
+      "item": "wizz:wizz_powder"
+    }
+  ],
+  "result": {
+    "item": "wizz:concept_truth",
+    "count": 4
+  }
+}

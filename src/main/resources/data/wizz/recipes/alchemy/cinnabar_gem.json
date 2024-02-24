@@ -1,0 +1,33 @@
+{
+  "type": "wizz:alchemy",
+  "daytime": "any",
+  "steps": [
+    {
+      "time": 10,
+      "ingredients": [
+        {
+          "item": "wizz:cinnabar_dust"
+        }
+      ]
+    },
+    {
+      "time": 5,
+      "ingredients": [
+        {
+          "item": "wizz:mercury_drop"
+        }
+      ]
+    },
+    {
+      "time": 7,
+      "ingredients": [
+        {
+          "item": "wizz:pearl"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "wizz:cinnabar_gem"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "type": "wizz:alchemy",
+  "daytime": "night",
+  "steps": [
+    {
+      "time": 10,
+      "ingredients": [
+        {
+          "item": "wizz:wizz_powder"
+        },
+        {
+          "item": "wizz:yue"
+        }
+      ]
+    },
+    {
+      "time": 8,
+      "ingredients": [
+        {
+          "item": "wizz:bloody_seeds"
+        },
+        {
+          "item": "wizz:cinnabar_gem"
+        }
+      ]
+    },
+    {
+      "time": 12,
+      "ingredients": [
+        {
+          "item": "wizz:enchanted_heart"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "wizz:fir"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "wizz:alchemy",
+  "daytime": "day",
+  "steps": [
+    {
+      "time": 8,
+      "ingredients": [
+        {
+          "item": "wizz:mercury_drop"
+        }
+      ]
+    },
+    {
+      "time": 10,
+      "ingredients": [
+        {
+          "item": "wizz:glass_shards"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "wizz:reflective_surface"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P P",
+    "PSP",
+    "PGP"
+  ],
+  "key": {
+    "S": {
+      "item": "wizz:enchanted_star"
+    },
+    "P": {
+      "item": "minecraft:polished_deepslate"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "wizz:alchemy_cauldron"
+  }
+}

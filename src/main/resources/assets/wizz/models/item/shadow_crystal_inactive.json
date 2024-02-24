@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizz:item/shadow_crystal_inactive"
+  }
+}

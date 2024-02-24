@@ -1,0 +1,6 @@
+{
+  "variants" : {
+    "water=false" : { "model" : "wizz:block/alchemy_cauldron" },
+    "water=true" : { "model" : "wizz:block/alchemy_cauldron_water" }
+  }
+}

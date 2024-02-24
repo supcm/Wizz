@@ -1,0 +1,25 @@
+{
+  "type": "wizz:alchemy",
+  "daytime": "any",
+  "steps": [
+    {
+      "time": 6,
+      "ingredients": [
+        {
+          "item": "wizz:mercury_drop"
+        }
+      ]
+    },
+    {
+      "time": 4,
+      "ingredients": [
+        {
+          "item": "minecraft:string"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "wizz:metallic_string"
+  }
+}

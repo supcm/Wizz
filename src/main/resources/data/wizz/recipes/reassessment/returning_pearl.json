@@ -1,0 +1,17 @@
+{
+  "type": "wizz:reassessment",
+  "concepts": [
+    0,
+    1,
+    1,
+    0,
+    1,
+    3
+  ],
+  "ingredient": {
+    "item": "wizz:pearl"
+  },
+  "result": {
+    "item": "wizz:returning_pearl"
+  }
+}

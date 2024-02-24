@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SOS",
+    "QCQ",
+    "#M#"
+  ],
+  "key": {
+    "S": {
+      "tag": "wizz:symbols"
+    },
+    "#": {
+      "item": "minecraft:obsidian"
+    },
+    "Q": {
+      "item": "wizz:enhanced_stabilizer"
+    },
+    "O": {
+      "item": "wizz:overloading_mech"
+    },
+    "C": {
+      "item": "wizz:enchanted_core"
+    },
+    "M": {
+      "item": "wizz:word_machine"
+    }
+  },
+  "result": {
+    "item": "wizz:word_forge"
+  }
+}

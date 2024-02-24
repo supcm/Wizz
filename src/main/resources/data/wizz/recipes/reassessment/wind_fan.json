@@ -1,0 +1,17 @@
+{
+  "type": "wizz:reassessment",
+  "concepts": [
+    0,
+    0,
+    0,
+    1,
+    2,
+    1
+  ],
+  "ingredient": {
+    "item": "wizz:folding_fan"
+  },
+  "result": {
+    "item": "wizz:wind_fan"
+  }
+}

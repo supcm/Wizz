@@ -1,0 +1,17 @@
+{
+  "type": "wizz:reassessment",
+  "concepts": [
+    0,
+    3,
+    1,
+    0,
+    1,
+    2
+  ],
+  "ingredient": {
+    "item": "wizz:core"
+  },
+  "result": {
+    "item": "wizz:overloading_mech"
+  }
+}

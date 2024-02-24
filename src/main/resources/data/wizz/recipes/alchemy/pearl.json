@@ -1,0 +1,33 @@
+{
+  "type": "wizz:alchemy",
+  "daytime": "day",
+  "steps": [
+    {
+      "time": 4,
+      "ingredients": [
+        {
+          "item": "wizz:glistering_powder"
+        }
+      ]
+    },
+    {
+      "time": 6,
+      "ingredients": [
+        {
+          "item": "wizz:mercury_drop"
+        }
+      ]
+    },
+    {
+      "time": 8,
+      "ingredients": [
+        {
+          "item": "minecraft:ender_pearl"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "wizz:pearl"
+  }
+}

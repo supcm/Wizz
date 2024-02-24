@@ -1,0 +1,22 @@
+{
+  "type": "wizz:concept",
+  "level": 5,
+  "ingredients": [
+    {
+      "item": "wizz:sat"
+    },
+    {
+      "item": "wizz:glistering_powder"
+    },
+    {
+      "tag": "minecraft:flowers"
+    },
+    {
+      "item": "wizz:wizz_powder"
+    }
+  ],
+  "result": {
+    "item": "wizz:concept_beauty",
+    "count": 4
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "wizz:concept",
+  "level": 3,
+  "ingredients": [
+    {
+      "item": "wizz:noy"
+    },
+    {
+      "tag": "wizz:dyes"
+    },
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:painting"
+    }
+  ],
+  "result": {
+    "item": "wizz:concept_art"
+  }
+}

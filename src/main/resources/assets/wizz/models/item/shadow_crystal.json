@@ -1,0 +1,9 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizz:item/shadow_crystal"
+  },
+  "overrides" : [
+    { "predicate" :  { "wizz:shadow" :  1.0 }, "model": "wizz:item/shadow_crystal_inactive" }
+  ]
+}

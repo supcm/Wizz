@@ -1,0 +1,15 @@
+{
+  "type": "wizz:grinding",
+  "mode": "crush",
+  "ingredients": [
+    {
+      "item": "minecraft:soul_soil"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    }
+  ],
+  "result": {
+    "item": "wizz:soul_powder"
+  }
+}

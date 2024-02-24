@@ -1,0 +1,11 @@
+{
+  "type" : "wizz:enchanting",
+  "tier": 2,
+  "level": 20,
+  "ingredient": {
+    "item": "minecraft:heart_of_the_sea"
+  },
+  "result": {
+    "item": "wizz:enchanted_heart"
+  }
+}

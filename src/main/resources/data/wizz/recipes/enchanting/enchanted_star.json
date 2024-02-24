@@ -1,0 +1,11 @@
+{
+  "type" : "wizz:enchanting",
+  "ingredient": {
+    "item": "wizz:star"
+  },
+  "level": 5,
+  "tier": 0,
+  "result": {
+    "item": "wizz:enchanted_star"
+  }
+}

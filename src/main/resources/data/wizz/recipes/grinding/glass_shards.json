@@ -1,0 +1,13 @@
+{
+  "type": "wizz:grinding",
+  "mode": "crush",
+  "ingredients": [
+    {
+      "item": "minecraft:glass"
+    }
+  ],
+  "result": {
+    "item": "wizz:glass_shards",
+    "count": 6
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "mortar_nonempty": {
+    "subtitles": "sounds.wizz.mortar_nonempty",
+    "sounds": [
+      "wizz:mortar_nonempty"
+    ]
+  },
+  "mortar_empty": {
+    "subtitles": "sounds.wizz.mortar_empty",
+    "sounds": [
+      "wizz:mortar_empty"
+    ]
+  }
+}

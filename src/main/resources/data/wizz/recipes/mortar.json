@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "S S",
+    " D "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:polished_deepslate_slab"
+    },
+    "D": {
+      "item": "minecraft:polished_deepslate"
+    }
+  },
+  "result": {
+    "item": "wizz:mortar"
+  }
+}

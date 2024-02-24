@@ -1,0 +1,5 @@
+// 1.20.2	2024-02-24T02:28:43.3602141	Tags for minecraft:block mod id wizz
+18c6350ad4bb8bf9492ab583179116e686fded0e data/minecraft/tags/blocks/mineable/axe.json
+492783e5e72544a034dca1f4fb7d9f32ea8204b6 data/minecraft/tags/blocks/mineable/pickaxe.json
+0af6c56b2528156b10abb09903754a2176c2c7c0 data/minecraft/tags/blocks/needs_iron_tool.json
+48f013e69be580c7477a71a612c36dea3c0556ff data/minecraft/tags/blocks/needs_stone_tool.json

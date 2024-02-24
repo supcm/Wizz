@@ -1,0 +1,16 @@
+{
+  "type": "wizz:grinding",
+  "mode": "crush",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "result": {
+    "item": "wizz:glistering_powder",
+    "count": 2
+  }
+}

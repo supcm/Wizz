@@ -1,0 +1,9 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizz:item/cats_eye"
+  },
+  "overrides" : [
+    { "predicate" :  { "wizz:opened" :  1.0 }, "model": "wizz:item/cats_eye_activated" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BDB",
+    "NSN",
+    "BEB"
+  ],
+  "key": {
+    "S": {
+      "tag": "wizz:symbols"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "N": {
+      "item": "wizz:lava_crystal"
+    },
+    "B": {
+      "item": "wizz:plate"
+    },
+    "D": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "wizz:stabilizer"
+  }
+}

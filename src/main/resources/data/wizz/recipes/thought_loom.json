@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ISI",
+    "ICI",
+    "PLP"
+  ],
+  "key": {
+    "S": {
+      "item": "wizz:stabilizer"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "wizz:plate"
+    },
+    "L": {
+      "item": "minecraft:loom"
+    },
+    "C": {
+      "item": "wizz:enchanted_star"
+    }
+  },
+  "result": {
+    "item": "wizz:thought_loom"
+  }
+}

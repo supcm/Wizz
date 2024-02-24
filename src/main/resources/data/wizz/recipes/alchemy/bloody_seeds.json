@@ -1,0 +1,36 @@
+{
+  "type": "wizz:alchemy",
+  "daytime": "night",
+  "steps": [
+    {
+      "time": 10,
+      "ingredients": [
+        {
+          "item": "wizz:sap"
+        }
+      ]
+    },
+    {
+      "time": 8,
+      "ingredients": [
+        {
+          "item": "wizz:cinnabar_dust"
+        },
+        {
+          "item": "wizz:soul_powder"
+        }
+      ]
+    },
+    {
+      "time": 12,
+      "ingredients": [
+        {
+          "item": "minecraft:wheat_seeds"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "wizz:bloody_seeds"
+  }
+}

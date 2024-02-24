@@ -1,0 +1,15 @@
+{
+  "type": "wizz:grinding",
+  "mode": "grind",
+  "ingredients": [
+    {
+      "item": "wizz:glistering_powder"
+    },
+    {
+      "item": "wizz:cinnabar_dust"
+    }
+  ],
+  "result": {
+    "item": "wizz:wizz_powder"
+  }
+}

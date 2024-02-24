@@ -1,0 +1,11 @@
+{
+  "type" : "wizz:enchanting",
+  "tier": 1,
+  "level": 10,
+  "ingredient": {
+    "item": "wizz:core"
+  },
+  "result": {
+    "item": "wizz:enchanted_core"
+  }
+}

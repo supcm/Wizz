@@ -1,0 +1,18 @@
+{
+  "type": "wizz:grinding",
+  "mode": "grind",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:spider_eye"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "result": {
+    "item": "wizz:disgusting_ball"
+  }
+}

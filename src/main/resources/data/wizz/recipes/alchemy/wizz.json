@@ -1,0 +1,28 @@
+{
+  "type": "wizz:alchemy",
+  "daytime": "day",
+  "steps": [
+    {
+      "time": 10,
+      "ingredients": [
+        {
+          "item": "minecraft:ghast_tear"
+        },
+        {
+          "item": "minecraft:heart_of_the_sea"
+        }
+      ]
+    },
+    {
+      "time": 5,
+      "ingredients": [
+        {
+          "item": "wizz:wizz_powder"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "wizz:wizz"
+  }
+}

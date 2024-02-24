@@ -1,0 +1,22 @@
+{
+  "type": "wizz:concept",
+  "level": 2,
+  "ingredients": [
+    {
+      "item": "wizz:ver"
+    },
+    {
+      "item": "minecraft:brick"
+    },
+    {
+      "item": "wizz:cinnabar_gem"
+    },
+    {
+      "item": "wizz:wizz_powder"
+    }
+  ],
+  "result": {
+    "item": "wizz:concept_creation",
+    "count": 4
+  }
+}

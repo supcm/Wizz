@@ -1,0 +1,17 @@
+{
+  "type": "wizz:reassessment",
+  "concepts": [
+    0,
+    2,
+    0,
+    3,
+    1,
+    0
+  ],
+  "ingredient": {
+    "item": "minecraft:ender_eye"
+  },
+  "result": {
+    "item": "wizz:cats_eye"
+  }
+}

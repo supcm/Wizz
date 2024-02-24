@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PAP",
+    "LOL",
+    "I#I"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:anvil"
+    },
+    "#": {
+      "item": "wizz:stabilizer"
+    },
+    "L": {
+      "item": "wizz:lava_crystal"
+    },
+    "P": {
+      "item": "wizz:plate"
+    },
+    "O": {
+      "item": "wizz:overloading_mech"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "item": "wizz:enchanting_station"
+  }
+}

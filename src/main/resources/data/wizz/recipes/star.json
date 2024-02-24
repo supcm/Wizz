@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BDB",
+    "DSD",
+    "BDB"
+  ],
+  "key": {
+    "S": {
+      "item": "wizz:lava_crystal"
+    },
+    "B": {
+      "item": "wizz:plate"
+    },
+    "D": {
+      "item": "minecraft:blaze_powder"
+    }
+  },
+  "result": {
+    "item": "wizz:star"
+  }
+}

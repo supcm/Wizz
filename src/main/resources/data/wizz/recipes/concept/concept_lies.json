@@ -1,0 +1,22 @@
+{
+  "type": "wizz:concept",
+  "level": 5,
+  "ingredients": [
+    {
+      "item": "wizz:woy"
+    },
+    {
+      "item": "wizz:disgusting_ball"
+    },
+    {
+      "item": "wizz:glass_shards"
+    },
+    {
+      "item": "wizz:wizz_powder"
+    }
+  ],
+  "result": {
+    "item": "wizz:concept_lies",
+    "count": 4
+  }
+}

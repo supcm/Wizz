@@ -1,0 +1,18 @@
+{
+  "type": "wizz:reassessment",
+  "concepts": [
+    1,
+    0,
+    0,
+    2,
+    1,
+    1
+  ],
+  "ingredient": {
+    "item": "minecraft:sweet_berries"
+  },
+  "result": {
+    "item": "wizz:healing_berries",
+    "count": 8
+  }
+}

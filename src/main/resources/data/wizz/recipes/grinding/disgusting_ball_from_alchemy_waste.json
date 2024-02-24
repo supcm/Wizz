@@ -1,0 +1,15 @@
+{
+  "type": "wizz:grinding",
+  "mode": "grind",
+  "ingredients": [
+    {
+      "item": "wizz:alchemy_waste"
+    },
+    {
+      "item": "minecraft:spider_eye"
+    }
+  ],
+  "result": {
+    "item": "wizz:disgusting_ball"
+  }
+}

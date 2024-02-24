@@ -1,0 +1,12 @@
+{
+  "type": "wizz:grinding",
+  "mode": "crush",
+  "ingredients": [
+    {
+      "item": "wizz:cinnabar"
+    }
+  ],
+  "result": {
+    "item": "wizz:cinnabar_dust"
+  }
+}

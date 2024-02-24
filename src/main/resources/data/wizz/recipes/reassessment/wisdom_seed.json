@@ -1,0 +1,17 @@
+{
+  "type": "wizz:reassessment",
+  "concepts": [
+    2,
+    0,
+    0,
+    0,
+    3,
+    2
+  ],
+  "ingredient": {
+    "item": "wizz:bloody_seeds"
+  },
+  "result": {
+    "item": "wizz:wisdom_seed"
+  }
+}

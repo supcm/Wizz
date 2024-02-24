@@ -1,0 +1,9 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "wizz:item/exaltation_stone"
+  },
+  "overrides" : [
+    { "predicate" :  { "wizz:is_ability" :  1.0 }, "model": "wizz:item/boost_exaltation_stone" }
+  ]
+}

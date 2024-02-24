@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PQP",
+    "SCS",
+    "#M#"
+  ],
+  "key": {
+    "S": {
+      "item": "wizz:lava_crystal"
+    },
+    "P": {
+      "item": "wizz:plate"
+    },
+    "Q": {
+      "item": "wizz:stabilizer"
+    },
+    "C": {
+      "item": "wizz:enchanted_star"
+    },
+    "M": {
+      "tag": "wizz:symbols"
+    },
+    "#": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "wizz:matrix"
+  }
+}

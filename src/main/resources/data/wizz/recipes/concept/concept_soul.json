@@ -1,0 +1,22 @@
+{
+  "type": "wizz:concept",
+  "level": 2,
+  "ingredients": [
+    {
+      "item": "wizz:iro"
+    },
+    {
+      "item": "wizz:soul_powder"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "wizz:wizz_powder"
+    }
+  ],
+  "result": {
+    "item": "wizz:concept_soul",
+    "count": 4
+  }
+}

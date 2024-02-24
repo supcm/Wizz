@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "wizz:clay_plate"
+  },
+  "result": "wizz:plate",
+  "experience": 1.25,
+  "cookingtime": 300
+}

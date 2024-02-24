@@ -1,0 +1,5 @@
+{
+    "variants" : {
+        "" : { "model" : "wizz:block/exaltation_table" }
+    }
+}

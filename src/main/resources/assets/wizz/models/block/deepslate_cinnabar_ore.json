@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "ambientocclusion": false,
+  "textures": {
+    "all": "wizz:block/deepslate_cinnabar_ore"
+  }
+}

@@ -65,11 +65,20 @@ public record GrindingRecipe(String mode, List<Ingredient> ingredients, ItemStac
 
         @Override
         public @Nullable GrindingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
-            return null;
+            String mode = buffer.readUtf();
+            ItemStack result = buffer.readItem();
+            NonNullList<Ingredient> ingredients = NonNullList.create();
+            for(int i = 0; i < buffer.readIntLE(); i++)
+                ingredients.add(Ingredient.fromNetwork(buffer));
+            return new GrindingRecipe(mode, ingredients, result, id);
         }
         @Override
         public void toNetwork(FriendlyByteBuf buffer, GrindingRecipe recipe) {
-
+            buffer.writeUtf(recipe.mode);
+            buffer.writeItemStack(recipe.result, false);
+            buffer.writeIntLE(recipe.ingredients.size());
+            for(Ingredient ing : recipe.ingredients)
+                ing.toNetwork(buffer);
         }
     }
 }

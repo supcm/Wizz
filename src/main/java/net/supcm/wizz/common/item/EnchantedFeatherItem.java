@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.supcm.wizz.WizzMod;
 import net.supcm.wizz.data.recipes.AlchemyRecipe;
@@ -38,18 +37,4 @@ public class EnchantedFeatherItem extends Item {
         }
     }
     @Override public boolean isFoil(ItemStack stack) { return true; }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if(!level.isClientSide) {
-            for(RecipeHolder<AlchemyRecipe> holder : level.getRecipeManager().getAllRecipesFor(Recipes.ALCHEMY.get())) {
-                WizzMod.LOGGER.warn(holder.id());
-                WizzMod.LOGGER.warn(holder.value().daytime());
-                WizzMod.LOGGER.warn(holder.value().getIngredients());
-                WizzMod.LOGGER.warn(holder.value().getResultItem(level.registryAccess()));
-
-            }
-        }
-        return super.use(level, player, hand);
-    }
 }

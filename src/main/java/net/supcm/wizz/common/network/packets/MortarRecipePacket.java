@@ -1,23 +1,20 @@
 package net.supcm.wizz.common.network.packets;
 
-import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraftforge.event.network.CustomPayloadEvent;
-import net.supcm.wizz.common.block.Blocks;
+import net.minecraftforge.network.NetworkEvent;
 import net.supcm.wizz.common.block.entity.MortarBlockEntity;
 import net.supcm.wizz.data.recipes.GrindingRecipe;
 import net.supcm.wizz.data.recipes.Recipes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class MortarRecipePacket {
     public final BlockPos pos;
@@ -33,12 +30,11 @@ public class MortarRecipePacket {
         buffer.writeBlockPos(pos);
         buffer.writeUtf(mode);
     }
-    public void handle(CustomPayloadEvent.Context ctx) {
-        ctx.enqueueWork(() -> {
-            ServerLevel level = ctx.getSender().serverLevel();
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> {
+            ServerLevel level = ctx.get().getSender().serverLevel();
             MortarBlockEntity tile = (MortarBlockEntity) level.getBlockEntity(pos);
-            for(RecipeHolder<GrindingRecipe> holder : level.getRecipeManager().getAllRecipesFor(Recipes.GRINDING.get())) {
-                GrindingRecipe recipe = holder.value();
+            for(GrindingRecipe recipe : level.getRecipeManager().getAllRecipesFor(Recipes.GRINDING.get())) {
                 if(recipe.mode().equals(mode)) {
                     //boolean flag = true;
                     if(recipe.ingredients().size() != getNonEmptySlots(tile))
@@ -71,7 +67,7 @@ public class MortarRecipePacket {
             }
         });
 
-        ctx.setPacketHandled(true);
+        ctx.get().setPacketHandled(true);
     }
     int getNonEmptySlots(MortarBlockEntity tile) {
         int count = 0;

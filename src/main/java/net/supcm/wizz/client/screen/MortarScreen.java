@@ -83,7 +83,7 @@ public class MortarScreen extends Screen {
     @Override public void onClose() {
         if(count >= 7) {
             tile = null;
-            PacketHandler.CHANNEL.send(new MortarRecipePacket(pos, getMode()), PacketDistributor.SERVER.noArg());
+            PacketHandler.CHANNEL.send(PacketDistributor.SERVER.noArg(), new MortarRecipePacket(pos, getMode()));
         }
         super.onClose();
     }
@@ -103,8 +103,8 @@ public class MortarScreen extends Screen {
         offset[1] = (int) (-pestle.cur_y * 20);
         return offset;
     }
-    @Override public void renderBackground(GuiGraphics gui, int x, int y, float partialTick) {
-        super.renderBackground(gui, x, y, partialTick);
+    @Override public void renderBackground(GuiGraphics gui) {
+        super.renderBackground(gui);
         gui.blit(TEXTURE, (width) / 2 - 50, height / 2 - 18, 0, 0, 95, 40);
     }
     void renderItems(GuiGraphics gui) {
@@ -136,6 +136,7 @@ public class MortarScreen extends Screen {
         gui.blit(TEXTURE, x, y, x_offset, y_offset, 16, 16);
     }
     @Override public void render(GuiGraphics gui, int x, int y, float partialTick) {
+        renderBackground(gui);
         super.render(gui, x, y, partialTick);
         renderItems(gui);
         int[] offset = getPestleOffset();

@@ -1,11 +1,16 @@
 package net.supcm.wizz.data.recipes;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.*;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -15,7 +20,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public record AlchemyRecipe(String daytime, List<Step> steps, ItemStack result) implements Recipe<SimpleContainer> {
+public record AlchemyRecipe(String daytime, List<Step> steps, ItemStack result, ResourceLocation id)
+        implements Recipe<SimpleContainer> {
     @Override public boolean matches(SimpleContainer container, Level level) {
         return true;
     }
@@ -40,21 +46,32 @@ public record AlchemyRecipe(String daytime, List<Step> steps, ItemStack result) 
     @Override public RecipeType<AlchemyRecipe> getType() {
         return Recipes.ALCHEMY.get();
     }
+
+    @Override
+    public ResourceLocation getId() {
+        return id;
+    }
+
     public static class Type implements RecipeType<AlchemyRecipe> {
 
     }
 
     public static class Serializer implements RecipeSerializer<AlchemyRecipe> {
+
         @Override
-        public Codec<AlchemyRecipe> codec() {
-            return RecordCodecBuilder.create(builder -> builder.group(
-                Codec.STRING.optionalFieldOf("daytime", "day").forGetter(AlchemyRecipe::daytime),
-                Step.CODEC.listOf().fieldOf("steps").forGetter(AlchemyRecipe::steps),
-                CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC.fieldOf("result").forGetter(AlchemyRecipe::result)
-            ).apply(builder, AlchemyRecipe::new));
+        public AlchemyRecipe fromJson(ResourceLocation id, JsonObject json) {
+            String daytime = GsonHelper.getAsString(json, "daytime");
+            JsonArray arr = GsonHelper.getAsJsonArray(json, "steps");
+            List<Step> steps = new ArrayList<>();
+            for(JsonElement element : arr) {
+                steps.add(Step.fromJson(element.getAsJsonObject()));
+            }
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            return new AlchemyRecipe(daytime, steps, result, id);
         }
+
         @Override
-        public @Nullable AlchemyRecipe fromNetwork(FriendlyByteBuf buffer) {
+        public @Nullable AlchemyRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
             String daytime = buffer.readUtf();
             ItemStack stack = buffer.readItem();
             int len = buffer.readIntLE();
@@ -67,7 +84,7 @@ public record AlchemyRecipe(String daytime, List<Step> steps, ItemStack result) 
                 int time = buffer.readInt();
                 steps.add(new Step(ingredients, time));
             }
-            return new AlchemyRecipe(daytime, steps, stack);
+            return new AlchemyRecipe(daytime, steps, stack, id);
         }
         @Override
         public void toNetwork(FriendlyByteBuf buffer, AlchemyRecipe recipe) {
@@ -82,11 +99,15 @@ public record AlchemyRecipe(String daytime, List<Step> steps, ItemStack result) 
         }
     }
     public record Step(List<ItemStack> ingredients, int time) {
-        public static final Codec<Step> CODEC = RecordCodecBuilder.create(builder -> builder.group(
-                CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC.listOf().fieldOf("ingredients")
-                        .forGetter(Step::ingredients),
-                Codec.INT.fieldOf("time").forGetter(Step::time)
-        ).apply(builder, Step::new));
+
+        public static Step fromJson(JsonObject json) {
+            int time = GsonHelper.getAsInt(json, "time");
+            JsonArray arr = GsonHelper.getAsJsonArray(json, "ingredients");
+            List<ItemStack> ingredients = NonNullList.create();
+            for(JsonElement element : arr)
+                ingredients.add(ShapedRecipe.itemStackFromJson(element.getAsJsonObject()));
+            return new Step(ingredients, time);
+        }
 
         public CompoundTag save() {
             CompoundTag tag = new CompoundTag();

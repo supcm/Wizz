@@ -10,8 +10,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -195,9 +193,8 @@ public class AlchemyCauldronBlockEntity extends BlockEntity {
     }
 
     public AlchemyRecipe getRecipe() {
-        List<RecipeHolder<AlchemyRecipe>> recipes = level.getRecipeManager().getAllRecipesFor(Recipes.ALCHEMY.get());
-        for(RecipeHolder<AlchemyRecipe> holder : recipes) {
-            AlchemyRecipe recipe = holder.value();
+        List<AlchemyRecipe> recipes = level.getRecipeManager().getAllRecipesFor(Recipes.ALCHEMY.get());
+        for(AlchemyRecipe recipe : recipes) {
             List<AlchemyRecipe.Step> steps = recipe.steps();
             boolean flag = steps.size() == this.steps.size();
             if(flag) {

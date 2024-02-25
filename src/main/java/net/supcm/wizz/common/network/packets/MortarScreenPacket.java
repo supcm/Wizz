@@ -5,8 +5,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import net.supcm.wizz.client.screen.MortarScreen;
+
+import java.util.function.Supplier;
 
 public class MortarScreenPacket {
     public final BlockPos pos;
@@ -19,9 +21,9 @@ public class MortarScreenPacket {
     public void save(FriendlyByteBuf buffer) {
         buffer.writeBlockPos(pos);
     }
-    public void handle(CustomPayloadEvent.Context ctx) {
-        ctx.enqueueWork(() -> openScreen(pos));
-        ctx.setPacketHandled(true);
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> openScreen(pos));
+        ctx.get().setPacketHandled(true);
     }
     @OnlyIn(Dist.CLIENT)
     public static void openScreen(BlockPos pos) {

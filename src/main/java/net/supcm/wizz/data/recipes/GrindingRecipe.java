@@ -1,10 +1,15 @@
 package net.supcm.wizz.data.recipes;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -13,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record GrindingRecipe(String mode, List<Ingredient> ingredients, ItemStack result) implements Recipe<SimpleContainer> {
+public record GrindingRecipe(String mode, List<Ingredient> ingredients, ItemStack result, ResourceLocation id) implements Recipe<SimpleContainer> {
     @Override public boolean matches(SimpleContainer container, Level level) {
         return true;
     }
@@ -31,6 +36,12 @@ public record GrindingRecipe(String mode, List<Ingredient> ingredients, ItemStac
         list.addAll(ingredients);
         return list;
     }
+
+    @Override
+    public ResourceLocation getId() {
+        return id;
+    }
+
     @Override public RecipeSerializer<GrindingRecipe> getSerializer() {
         return Recipes.GRINDING_SERIALIZER.get();
     }
@@ -42,15 +53,18 @@ public record GrindingRecipe(String mode, List<Ingredient> ingredients, ItemStac
     }
     public static class Serializer implements RecipeSerializer<GrindingRecipe> {
         @Override
-        public Codec<GrindingRecipe> codec() {
-            return RecordCodecBuilder.create(builder -> builder.group(
-                    Codec.STRING.fieldOf("mode").forGetter(GrindingRecipe::mode),
-                    Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(GrindingRecipe::ingredients),
-                    CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC.fieldOf("result").forGetter(GrindingRecipe::result)
-            ).apply(builder, GrindingRecipe::new));
+        public GrindingRecipe fromJson(ResourceLocation id, JsonObject json) {
+            String mode = GsonHelper.getAsString(json, "mode");
+            JsonArray arr = GsonHelper.getAsJsonArray(json, "ingredients");
+            NonNullList<Ingredient> ingredients = NonNullList.create();
+            for(JsonElement element : arr)
+                ingredients.add(Ingredient.fromJson(element));
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            return new GrindingRecipe(mode, ingredients, result, id);
         }
+
         @Override
-        public @Nullable GrindingRecipe fromNetwork(FriendlyByteBuf buffer) {
+        public @Nullable GrindingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
             return null;
         }
         @Override

@@ -1,10 +1,15 @@
 package net.supcm.wizz.data.recipes;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -14,7 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public record ConceptRecipe(List<Ingredient> ingredients, int level, ItemStack output) implements Recipe<SimpleContainer> {
+public record ConceptRecipe(List<Ingredient> ingredients, int level, ItemStack output, ResourceLocation id)
+        implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer container, Level level) {
         return true;
@@ -41,6 +47,9 @@ public record ConceptRecipe(List<Ingredient> ingredients, int level, ItemStack o
         ingredients.addAll(this.ingredients);
         return ingredients;
     }
+    @Override public ResourceLocation getId() {
+        return id;
+    }
 
     @Override
     public RecipeSerializer<ConceptRecipe> getSerializer() {
@@ -57,22 +66,24 @@ public record ConceptRecipe(List<Ingredient> ingredients, int level, ItemStack o
 
     public static class Serializer implements RecipeSerializer<ConceptRecipe> {
         @Override
-        public Codec<ConceptRecipe> codec() {
-            return RecordCodecBuilder.create(builder -> builder.group(
-                    Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(ConceptRecipe::ingredients),
-                    Codec.INT.fieldOf("level").forGetter(ConceptRecipe::level),
-                    CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC.fieldOf("result").forGetter(ConceptRecipe::output)
-            ).apply(builder, ConceptRecipe::new));
+        public ConceptRecipe fromJson(ResourceLocation id, JsonObject json) {
+            int level = GsonHelper.getAsInt(json, "level");
+            JsonArray arr = GsonHelper.getAsJsonArray(json, "ingredients");
+            NonNullList<Ingredient> ingredients = NonNullList.create();
+            for(JsonElement element : arr)
+                ingredients.add(Ingredient.fromJson(element));
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            return new ConceptRecipe(ingredients, level, result, id);
         }
         @Override
-        public @Nullable ConceptRecipe fromNetwork(FriendlyByteBuf buffer) {
+        public @Nullable ConceptRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
             int len = buffer.readIntLE();
             List<Ingredient> input = new ArrayList<>();
             for(int i = 0; i < len; i++)
                 input.add(Ingredient.fromNetwork(buffer));
             ItemStack output = buffer.readItem();
             int level = buffer.readInt();
-            return new ConceptRecipe(input, level, output);
+            return new ConceptRecipe(input, level, output, id);
         }
         @Override
         public void toNetwork(FriendlyByteBuf buffer, ConceptRecipe recipe) {

@@ -5,8 +5,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import net.supcm.wizz.client.screen.CodexScreen;
+
+import java.util.function.Supplier;
 
 public class CodexScreenPacket {
     public final CompoundTag tag;
@@ -17,9 +19,9 @@ public class CodexScreenPacket {
     public void save(FriendlyByteBuf buffer) {
         buffer.writeNbt(tag);
     }
-    public void handle(CustomPayloadEvent.Context ctx) {
-        ctx.enqueueWork(() -> openScreen(tag));
-        ctx.setPacketHandled(true);
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> openScreen(tag));
+        ctx.get().setPacketHandled(true);
     }
     @OnlyIn(Dist.CLIENT)
     public static void openScreen(CompoundTag msg) {

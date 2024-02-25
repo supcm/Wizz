@@ -64,8 +64,8 @@ public class CodexItem extends Item {
     @Override public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         if(!world.isClientSide) {
             CompoundTag tag = player.getItemInHand(hand).getOrCreateTag();
-            PacketHandler.CHANNEL.send(new CodexScreenPacket(tag),
-                    PacketDistributor.PLAYER.with((ServerPlayer) player));
+            PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
+                    new CodexScreenPacket(tag));
         }
         return InteractionResultHolder.pass(player.getItemInHand(hand));
     }

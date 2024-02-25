@@ -1,20 +1,15 @@
 package net.supcm.wizz.common.block.entity;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.IntTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -173,10 +168,9 @@ public class ReassessmentTableBlockEntity extends BlockEntity {
         if(isValid){
             boolean setLeastOne = false;
             List<Integer> concepts = createConcepts();
-            List<RecipeHolder<ReassessmentRecipe>> recipes = level.getRecipeManager()
+            List<ReassessmentRecipe> recipes = level.getRecipeManager()
                     .getAllRecipesFor(Recipes.REASSESSMENT.get());
-            for (RecipeHolder<ReassessmentRecipe> holder : recipes) {
-                ReassessmentRecipe recipe = holder.value();
+            for (ReassessmentRecipe recipe : recipes) {
                 if (recipe.input().test(handler.getStackInSlot(0))) {
                     boolean isVal = true;
                     for (int i = 0; i < concepts.size(); i++) {

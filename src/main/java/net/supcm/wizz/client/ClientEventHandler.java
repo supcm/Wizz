@@ -95,7 +95,7 @@ public class ClientEventHandler {
     public static class ForgeEventHandler {
         @SubscribeEvent
         public static void onOpenGui(ScreenEvent.Opening e) {
-            if(e.getNewScreen() instanceof EnchantmentScreen && WizzModConfig.DISABLE_VANILLA.get()) {
+            if(e.getNewScreen() instanceof EnchantmentScreen) {
                 Minecraft.getInstance().player.closeContainer();
                 Minecraft.getInstance().player.displayClientMessage(
                         Component.translatable("enchanting_table.message", 0),

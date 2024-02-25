@@ -92,8 +92,8 @@ public class MortarBlock extends Block implements EntityBlock {
                     return InteractionResult.SUCCESS;
                 }
             } else {
-                PacketHandler.CHANNEL.send(new MortarScreenPacket(pos),
-                        PacketDistributor.PLAYER.with((ServerPlayer) player));
+                PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
+                        new MortarScreenPacket(pos));
                 return InteractionResult.SUCCESS;
             }
         }

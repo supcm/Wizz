@@ -1,9 +1,15 @@
 package net.supcm.wizz.data.recipes;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -13,7 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public record ReassessmentRecipe(Ingredient input, List<Integer> concepts, ItemStack output) implements Recipe<SimpleContainer> {
+public record ReassessmentRecipe(Ingredient input, List<Integer> concepts, ItemStack output, ResourceLocation id)
+        implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer container, Level level) {
         return true;
@@ -43,26 +50,34 @@ public record ReassessmentRecipe(Ingredient input, List<Integer> concepts, ItemS
     public RecipeType<ReassessmentRecipe> getType() {
         return Recipes.REASSESSMENT.get();
     }
+
+    @Override
+    public ResourceLocation getId() {
+        return id;
+    }
+
     public static class Type implements RecipeType<ReassessmentRecipe> {
 
     }
     public static class Serializer implements RecipeSerializer<ReassessmentRecipe> {
         @Override
-        public Codec<ReassessmentRecipe> codec() {
-            return RecordCodecBuilder.create(builder -> builder.group(
-                    Ingredient.CODEC.fieldOf("ingredient").forGetter(ReassessmentRecipe::input),
-                    Codec.INT.listOf().fieldOf("concepts").forGetter(ReassessmentRecipe::concepts),
-                    CraftingRecipeCodecs.ITEMSTACK_OBJECT_CODEC.fieldOf("result").forGetter(ReassessmentRecipe::output)
-            ).apply(builder, ReassessmentRecipe::new));
+        public ReassessmentRecipe fromJson(ResourceLocation id, JsonObject json) {
+            JsonArray arr = GsonHelper.getAsJsonArray(json, "concepts");
+            List<Integer> concepts = new ArrayList<>();
+            for(JsonElement element : arr)
+                concepts.add(element.getAsInt());
+            Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            return new ReassessmentRecipe(ingredient, concepts, result, id);
         }
         @Override
-        public @Nullable ReassessmentRecipe fromNetwork(FriendlyByteBuf buffer) {
+        public @Nullable ReassessmentRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
             Ingredient input = Ingredient.fromNetwork(buffer);
             List<Integer> concepts = new ArrayList<>();
             for(int i = 0; i < 6; i++)
                 concepts.add(buffer.readInt());
             ItemStack output = buffer.readItem();
-            return new ReassessmentRecipe(input, concepts, output);
+            return new ReassessmentRecipe(input, concepts, output, id);
         }
         @Override
         public void toNetwork(FriendlyByteBuf buffer, ReassessmentRecipe recipe) {

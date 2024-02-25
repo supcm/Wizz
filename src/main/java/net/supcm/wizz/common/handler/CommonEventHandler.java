@@ -2,6 +2,7 @@ package net.supcm.wizz.common.handler;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -76,18 +77,18 @@ public class CommonEventHandler {
         }
         @SubscribeEvent public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent e) {
             if(!e.getEntity().level().isClientSide){
-                PacketHandler.CHANNEL.send(new T2ListPacket(
-                        createSecondList(new Random(((ServerLevel)e.getEntity().level()).getSeed()))),
-                        PacketDistributor.ALL.noArg());
-                PacketHandler.CHANNEL.send(new T3ListPacket(
-                        createThirdList(new Random(((ServerLevel)e.getEntity().level()).getSeed()))),
-                        PacketDistributor.ALL.noArg());
+                PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) e.getEntity()),
+                        new T2ListPacket(createSecondList(new Random(((ServerLevel)e.getEntity().level()).getSeed()))));
+                PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) e.getEntity()),
+                        new T3ListPacket(createThirdList(new Random(((ServerLevel)e.getEntity().level()).getSeed()))));
             }
         }
         @SubscribeEvent public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent e) {
             if(!e.getEntity().level().isClientSide){
-                PacketHandler.CHANNEL.send(new T2ListPacket(new ArrayList<>()), PacketDistributor.ALL.noArg());
-                PacketHandler.CHANNEL.send(new T3ListPacket(new ArrayList<>()), PacketDistributor.ALL.noArg());
+                PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) e.getEntity()),
+                        new T2ListPacket(new ArrayList<>()));
+                PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) e.getEntity()),
+                        new T3ListPacket(new ArrayList<>()));
             }
         }
         public static void randomizeFirstList(Random rand) {

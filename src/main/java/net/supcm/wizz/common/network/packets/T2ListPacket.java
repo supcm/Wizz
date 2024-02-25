@@ -1,12 +1,13 @@
 package net.supcm.wizz.common.network.packets;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import net.supcm.wizz.client.renderer.blockentity.WordForgeBlockEntityRenderer;
 import net.supcm.wizz.client.renderer.blockentity.WordMachineBlockEntityRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class T2ListPacket {
     public final List<String> list;
@@ -23,11 +24,11 @@ public class T2ListPacket {
         for(String str : list)
             buffer.writeUtf(str, 7);
     }
-    public void handle(CustomPayloadEvent.Context ctx) {
-        ctx.enqueueWork(() -> {
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> {
             WordMachineBlockEntityRenderer.setList(list);
             WordForgeBlockEntityRenderer.setListT2(list);
         });
-        ctx.setPacketHandled(true);
+        ctx.get().setPacketHandled(true);
     }
 }

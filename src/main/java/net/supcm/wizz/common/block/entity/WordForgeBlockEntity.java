@@ -17,13 +17,11 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -235,10 +233,9 @@ public class WordForgeBlockEntity extends BlockEntity {
     }
     public InteractionResult enchantItem(Player player, ItemStack handItem) {
         if(!handler.getStackInSlot(0).isEmpty()){
-            List<RecipeHolder<EnchantingRecipe>> recipeList = level.getRecipeManager()
+            List<EnchantingRecipe> recipeList = level.getRecipeManager()
                     .getAllRecipesFor(Recipes.ENCHANTING.get());
-            for (RecipeHolder<EnchantingRecipe> recipeHolder : recipeList) {
-                EnchantingRecipe recipe = recipeHolder.value();
+            for (EnchantingRecipe recipe : recipeList) {
                 if (recipe.input().test(handItem)) {
                     ItemStack output = recipe.getResultItem(level.registryAccess());
                     int thisLevel = recipe.level();

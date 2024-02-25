@@ -98,14 +98,13 @@ public class CodexScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(GuiGraphics gui, int p_299421_, int p_298679_, float p_297268_) {
-        super.renderBackground(gui, p_299421_, p_298679_, p_297268_);
+    public void renderBackground(GuiGraphics gui) {
+        super.renderBackground(gui);
         gui.blit(TEXTURE, (width - 192) / 2 - 36, 2, 0, 0, 256, 192);
     }
 
     @Override public void render(GuiGraphics gui, int x, int y, float tick) {
-        renderBackground(gui, x, y, tick);
-        //RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        renderBackground(gui);
         int i = 0;
         for(Map.Entry<String, Enchantment> entry : pages.get(currentPage).getEntries()){
             if(WizzModConfig.ENABLE_DESCRIPTIONS_IN_CODEX.get() ||
@@ -143,12 +142,12 @@ public class CodexScreen extends Screen {
                 }
             }
             gui.drawString(minecraft.font, Component.translatable(entry.getValue().getDescriptionId()),
-                    (width - 192) / 2 - 20, 32 + i*28, entry.getValue().isCurse() ? ChatFormatting.RED.getColor() : 0x561185);
+                    (width - 192) / 2 - 20, 32 + i*28, entry.getValue().isCurse() ? ChatFormatting.RED.getColor() : 0x561185, false);
             i++;
             if(i == 4) i = 0;
         }
         gui.drawString(minecraft.font, Component.literal((currentPage + 1) + "/" + getPages()),
-                (width - 192) / 2 + 62, 159, 0xffffff);
+                (width - 192) / 2 + 62, 159, 0xffffff, false);
         super.render(gui, x, y, tick);
     }
     public boolean isMouseAt(Rectangle2D rect, double mouseX, double mouseY) {

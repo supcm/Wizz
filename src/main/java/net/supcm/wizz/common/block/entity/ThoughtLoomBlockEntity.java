@@ -18,9 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -115,10 +113,9 @@ public class ThoughtLoomBlockEntity extends BlockEntity {
                 !handler.getStackInSlot(1).isEmpty() ||
                         !handler.getStackInSlot(2).isEmpty() ||
                         !handler.getStackInSlot(3).isEmpty())) {
-            List<RecipeHolder<ConceptRecipe>> recipes = level.getRecipeManager()
+            List<ConceptRecipe> recipes = level.getRecipeManager()
                     .getAllRecipesFor(Recipes.CONCEPT.get());
-            for(RecipeHolder<ConceptRecipe> holder : recipes) {
-                ConceptRecipe recipe = holder.value();
+            for(ConceptRecipe recipe : recipes) {
                 if(recipe.level() <= player.experienceLevel ||
                         player.isCreative()) {
                     int lvl = recipe.level();

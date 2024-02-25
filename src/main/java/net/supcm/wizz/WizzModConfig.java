@@ -8,7 +8,6 @@ import java.util.List;
 public class WizzModConfig {
     public static ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static ForgeConfigSpec SPEC;
-    public static final ForgeConfigSpec.ConfigValue<Boolean> DISABLE_VANILLA;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_DESCRIPTIONS_IN_CODEX;
     public static final ForgeConfigSpec.ConfigValue<Integer> ENCHANTING_MULT;
     public static final ForgeConfigSpec.ConfigValue<Double> ENCHANTING_EASE;
@@ -16,9 +15,6 @@ public class WizzModConfig {
 
     static {
         BUILDER.push("Configuration file for Wizz");
-        DISABLE_VANILLA = BUILDER.comment("Disable vanilla enchanting system (true/false)",
-                        "Default: true")
-                .define("DISABLE_VANILLA", true);
         ENABLE_DESCRIPTIONS_IN_CODEX = BUILDER.comment("Enable descriptions in codex",
                         "(WARNING! Descriptions doesn't work without 'Enchantments Description mod!')")
                 .define("ENABLE_DESCRIPTIONS_IN_CODEX", false);

@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -51,11 +52,20 @@ public record GrindingRecipe(String mode, List<Ingredient> ingredients, ItemStac
         }
         @Override
         public @Nullable GrindingRecipe fromNetwork(FriendlyByteBuf buffer) {
-            return null;
+            String mode = buffer.readUtf();
+            ItemStack result = buffer.readItem();
+            NonNullList<Ingredient> ingredients = NonNullList.create();
+            for(int i = 0; i < buffer.readIntLE(); i++)
+                ingredients.add(Ingredient.fromNetwork(buffer));
+            return new GrindingRecipe(mode, ingredients, result);
         }
         @Override
         public void toNetwork(FriendlyByteBuf buffer, GrindingRecipe recipe) {
-
+            buffer.writeUtf(recipe.mode);
+            buffer.writeItemStack(recipe.result, false);
+            buffer.writeIntLE(recipe.ingredients.size());
+            for(Ingredient ing : recipe.ingredients)
+                ing.toNetwork(buffer);
         }
     }
 }

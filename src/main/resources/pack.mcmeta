@@ -4,5 +4,13 @@
       "text": "${mod_id} resources"
     },
     "pack_format": 18
+  },
+  "filter": {
+    "block": [
+      {
+        "namespace": "minecraft",
+        "path": "recipes/enchanting_table.json"
+      }
+    ]
   }
 }

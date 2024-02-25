@@ -38,18 +38,4 @@ public class EnchantedFeatherItem extends Item {
         }
     }
     @Override public boolean isFoil(ItemStack stack) { return true; }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        if(!level.isClientSide) {
-            for(RecipeHolder<AlchemyRecipe> holder : level.getRecipeManager().getAllRecipesFor(Recipes.ALCHEMY.get())) {
-                WizzMod.LOGGER.warn(holder.id());
-                WizzMod.LOGGER.warn(holder.value().daytime());
-                WizzMod.LOGGER.warn(holder.value().getIngredients());
-                WizzMod.LOGGER.warn(holder.value().getResultItem(level.registryAccess()));
-
-            }
-        }
-        return super.use(level, player, hand);
-    }
 }

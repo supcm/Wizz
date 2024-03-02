@@ -18,7 +18,6 @@ import net.supcm.wizz.WizzMod;
 import net.supcm.wizz.common.block.Blocks;
 import net.supcm.wizz.common.item.Items;
 import net.supcm.wizz.data.recipes.ConceptRecipe;
-import net.supcm.wizz.data.recipes.EnchantingRecipe;
 
 public class ConceptCategory implements IRecipeCategory<ConceptRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(WizzMod.MODID, "concept");

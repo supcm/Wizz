@@ -25,7 +25,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.supcm.wizz.common.block.entity.WordMachineBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class WordMachineBlock extends Block implements EntityBlock {
@@ -63,7 +62,7 @@ public class WordMachineBlock extends Block implements EntityBlock {
                 WordMachineBlockEntity tile = (WordMachineBlockEntity)world.getBlockEntity(pos);
                 ItemStack handItem = player.getItemInHand(hand);
                 double hitLoc = hit.getLocation().y;
-                boolean up = hitLoc-(int)hitLoc >= 0.75d || (int)hitLoc > pos.getY();
+                boolean up = Math.abs(hitLoc - pos.getY()) >= 0.75;
                 if(handItem.isEmpty() || handItem.getItem() instanceof net.supcm.wizz.common.item.Items.GlyphItem){
                     if(up) tile.insertOrExtractItem(player, 0);
                     else tile.insertOrExtractItem(player, 1);

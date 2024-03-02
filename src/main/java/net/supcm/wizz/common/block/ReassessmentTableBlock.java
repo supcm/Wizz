@@ -29,7 +29,6 @@ import net.supcm.wizz.common.block.entity.ReassessmentTableBlockEntity;
 import net.supcm.wizz.common.item.Items;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class ReassessmentTableBlock extends Block implements EntityBlock {

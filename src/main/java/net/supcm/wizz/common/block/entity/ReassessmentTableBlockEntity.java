@@ -210,10 +210,11 @@ public class ReassessmentTableBlockEntity extends BlockEntity {
         isValid = valid;
         if(valid){
             for (BlockPos pos : pillarsPoses) {
-                ReassessmentPillarBlockEntity tile = (ReassessmentPillarBlockEntity)level.getBlockEntity(pos);
-                tile.setLinkedTable(this);
-                pillars.put(pos, tile.handler.getStackInSlot(0));
-                updateRecipe();
+                if(level != null && pos != null && level.getBlockEntity(pos) instanceof ReassessmentPillarBlockEntity tile) {
+                    tile.setLinkedTable(this);
+                    pillars.put(pos, tile.handler.getStackInSlot(0));
+                    updateRecipe();
+                }
             }
         } else {
             invalidatePillars();

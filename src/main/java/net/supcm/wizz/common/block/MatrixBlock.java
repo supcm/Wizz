@@ -72,7 +72,7 @@ public class MatrixBlock extends BaseEntityBlock {
             if(world.getBlockEntity(pos) instanceof MatrixBlockEntity tile) {
                 ItemStack handItem = player.getItemInHand(hand);
                 double hitLoc = hit.getLocation().y;
-                boolean up = hitLoc-(int)hitLoc >= 0.75d || (int)hitLoc > pos.getY();
+                boolean up = Math.abs(hitLoc - pos.getY()) >= 0.75;
                 if(!tile.doCraft){
                     if (up && (handItem.isEmpty() || handItem.getItem() == Items.PLATE.get())) {
                         tile.insertOrExtractItem(player, 0);

@@ -24,8 +24,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.supcm.wizz.common.block.entity.WordEraserBlockEntity;
-import net.supcm.wizz.common.block.entity.WordForgeBlockEntity;
-import net.supcm.wizz.common.block.entity.WordMachineBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;

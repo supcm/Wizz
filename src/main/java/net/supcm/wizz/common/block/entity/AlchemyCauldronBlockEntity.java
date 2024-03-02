@@ -233,4 +233,8 @@ public class AlchemyCauldronBlockEntity extends BlockEntity {
         }
         return false;
     }
+
+    public int getStepsCount() {
+        return steps.size();
+    }
 }

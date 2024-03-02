@@ -1,13 +1,11 @@
 package net.supcm.wizz.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -16,9 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.supcm.wizz.WizzMod;
-import net.supcm.wizz.WizzModConfig;
 import net.supcm.wizz.client.renderer.blockentity.*;
-import net.supcm.wizz.common.block.AlchemyCauldronBlock;
 import net.supcm.wizz.common.block.Blocks;
 import net.supcm.wizz.common.block.entity.BlockEntities;
 import net.supcm.wizz.common.item.Items;

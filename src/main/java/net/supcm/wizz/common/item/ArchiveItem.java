@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.supcm.wizz.common.enchantment.Enchantments;
 import net.supcm.wizz.common.handler.EnchantmentsHandler;
 
 import javax.annotation.Nullable;

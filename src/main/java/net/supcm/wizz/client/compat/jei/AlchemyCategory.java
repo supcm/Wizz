@@ -17,9 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.supcm.wizz.WizzMod;
 import net.supcm.wizz.common.block.Blocks;
-import net.supcm.wizz.common.item.Items;
 import net.supcm.wizz.data.recipes.AlchemyRecipe;
-import net.supcm.wizz.data.recipes.GrindingRecipe;
 
 public class AlchemyCategory implements IRecipeCategory<AlchemyRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(WizzMod.MODID, "alchemy");

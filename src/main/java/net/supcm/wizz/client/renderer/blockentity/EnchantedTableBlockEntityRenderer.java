@@ -1,26 +1,17 @@
 package net.supcm.wizz.client.renderer.blockentity;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.supcm.wizz.WizzMod;
 import net.supcm.wizz.common.block.entity.EnchantedTableBlockEntity;
-import net.supcm.wizz.common.item.Items;
 import org.joml.Matrix4f;
-import org.joml.Vector3f;
-import org.lwjgl.opengl.GL11;
 
 public class EnchantedTableBlockEntityRenderer implements BlockEntityRenderer<EnchantedTableBlockEntity> {
     float s = 0.55F;
@@ -28,16 +19,16 @@ public class EnchantedTableBlockEntityRenderer implements BlockEntityRenderer<En
     public EnchantedTableBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
     @Override
-    public void render(EnchantedTableBlockEntity te, float p_112308_, PoseStack ms,
+    public void render(EnchantedTableBlockEntity te, float partialTicks, PoseStack ms,
                        MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         ItemStack stack = te.handler.getStackInSlot(0);
 
         if (!stack.isEmpty()) {
             ms.pushPose();
-            ms.translate(0.5F, 0.75 + 0.085 * Math.cos(0.05f * te.getLevel().getGameTime()), 0.5F);
+            ms.translate(0.5F, 0.75 + 0.085 * Math.cos(0.05f * partialTicks), 0.5F);
             ms.mulPose(Axis.XN.rotationDegrees(90f));
-            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(te.getLevel().getGameTime() / 12.5f))));
-            ms.mulPose(Axis.ZN.rotationDegrees(te.getLevel().getGameTime() / 1.8525f));
+            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(partialTicks / 12.5f))));
+            ms.mulPose(Axis.ZN.rotationDegrees(partialTicks / 1.8525f));
             ms.scale(s, s, s);
             mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight,
                     combinedOverlay, ms, buffer, te.getLevel(), 0);

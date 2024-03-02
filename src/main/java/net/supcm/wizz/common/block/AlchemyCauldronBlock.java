@@ -1,5 +1,6 @@
 package net.supcm.wizz.common.block;
 
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
@@ -22,14 +23,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.supcm.wizz.common.block.entity.AlchemyCauldronBlockEntity;
-import net.supcm.wizz.common.block.entity.EnchantingStationBlockEntity;
 import net.supcm.wizz.common.item.Items;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,7 +58,7 @@ public class AlchemyCauldronBlock extends Block implements EntityBlock {
     @Override public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext ctx) {
         return SHAPE;
     }
-    /*@Override public RenderShape getRenderShape(BlockState state) { return RenderShape.MODEL; }*/
+    @Override public RenderShape getRenderShape(BlockState state) { return RenderShape.MODEL; }
     @Nullable @Override public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new AlchemyCauldronBlockEntity(pos, state);
     }
@@ -69,18 +68,29 @@ public class AlchemyCauldronBlock extends Block implements EntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
         return (level, pos, state, blockEntity) -> ((AlchemyCauldronBlockEntity)blockEntity).tick(state, pos);
     }
-
+    @Override
+    protected void spawnDestroyParticles(Level level, Player player, BlockPos pos, BlockState state) {
+        if(level.getBlockEntity(pos) instanceof AlchemyCauldronBlockEntity te) {
+            if(te.getStepsCount() > 0 || te.getSeconds() > 0) {
+                for(int i = 0; i < 8; i++) {
+                    double x = pos.getX() + level.random.nextDouble() + 0.25;
+                    double y = pos.getY() + 0.75;
+                    double z = pos.getZ() + level.random.nextDouble() + 0.25;
+                    level.addParticle(ParticleTypes.SOUL,
+                            x, y, z, 0d, 0.1d, 0d);
+                }
+            }
+        }
+        super.spawnDestroyParticles(level, player, pos, state);
+    }
     @Override
     public void onRemove(BlockState nextState, Level level, BlockPos pos, BlockState state, boolean flag) {
-        if(!level.isClientSide && level.getBlockEntity(pos) instanceof AlchemyCauldronBlockEntity te) {
-            if(te.isProcessing()) {
+        if(level.getBlockEntity(pos) instanceof AlchemyCauldronBlockEntity te) {
+            if(!level.isClientSide && te.isProcessing()) {
                 ItemEntity item = new ItemEntity(level, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
                         new ItemStack(Items.ALCHEMY_WASTE.get()));
                 level.addFreshEntity(item);
             }
-        } else {
-            level.addParticle(ParticleTypes.SOUL, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
-                    0, 0.5, 0);
         }
         super.onRemove(nextState, level, pos, state, flag);
     }

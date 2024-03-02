@@ -26,7 +26,6 @@ import net.supcm.wizz.common.block.entity.WordForgeBlockEntity;
 import net.supcm.wizz.common.item.Items;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class WordForgeBlock extends Block implements EntityBlock {
@@ -72,8 +71,8 @@ public class WordForgeBlock extends Block implements EntityBlock {
             if(world.getBlockEntity(pos) instanceof WordForgeBlockEntity tile) {
                 ItemStack handItem = player.getItemInHand(hand);
                 double hitLoc = hit.getLocation().y;
-                boolean up = hitLoc-(int)hitLoc >= 0.9D || (int)hitLoc > pos.getY();
-                boolean low = hitLoc-(int)hitLoc <= 0.45D && (int)hitLoc < pos.getY()+1;
+                boolean up = Math.abs(hitLoc-pos.getY()) >= 0.9D;
+                boolean low = Math.abs(hitLoc-pos.getY()) <= 0.45D;
                 if(handItem.isEmpty() || handItem.getItem() instanceof Items.GlyphItem) {
                     if(up) tile.insertOrExtractItem(player, 0);
                     else if(low) tile.insertOrExtractItem(player, 2);

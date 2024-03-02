@@ -24,10 +24,10 @@ public class WordEraserBlockEntityRenderer implements BlockEntityRenderer<WordEr
         ItemStack stack = te.handler.getStackInSlot(0);
         if (!stack.isEmpty()) {
             ms.pushPose();
-            ms.translate(0.5F, 0.4 + 0.035 * Math.cos(0.05f * te.getLevel().getGameTime()), 0.5F);
-            ms.mulPose(Axis.YN.rotationDegrees(te.getLevel().getGameTime() / 0.8525f));
+            ms.translate(0.5F, 0.4 + 0.035 * Math.cos(0.05f * partialTicks), 0.5F);
+            ms.mulPose(Axis.YN.rotationDegrees(partialTicks / 0.8525f));
             ms.scale(s, s, s);
-            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(te.getLevel().getGameTime() / 12.5f))));
+            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75 * Math.sin(partialTicks / 12.5))));
             Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight,
                     combinedOverlay, ms, buffer, te.getLevel(), 0);
             ms.popPose();

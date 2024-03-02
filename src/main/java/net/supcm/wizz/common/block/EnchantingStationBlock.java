@@ -27,7 +27,6 @@ import net.supcm.wizz.common.block.entity.EnchantingStationBlockEntity;
 import net.supcm.wizz.common.item.Items;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
 public class EnchantingStationBlock extends Block implements EntityBlock {
@@ -73,7 +72,7 @@ public class EnchantingStationBlock extends Block implements EntityBlock {
             if(hand == InteractionHand.MAIN_HAND) {
                 if(world.getBlockEntity(pos) instanceof EnchantingStationBlockEntity tile) {
                     double hitLoc = hit.getLocation().y;
-                    boolean up = hitLoc-(int)hitLoc >= 0.45d || (int)hitLoc > pos.getY();
+                    boolean up = Math.abs(hitLoc - pos.getY()) >= 0.45;
                     if(!tile.doCraft){
                         if (up) tile.insertOrExtractItem(player, 0);
                         else tile.insertOrExtractItem(player, 1);

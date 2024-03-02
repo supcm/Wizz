@@ -40,10 +40,10 @@ public class ReassessmentTableBlockEntityRenderer implements BlockEntityRenderer
             ItemStack stack = te.handler.getStackInSlot(0);
             if (!stack.isEmpty()) {
                 ms.pushPose();
-                ms.translate(0.5F, 0.95 + 0.015 * Math.cos(0.05f * te.getLevel().getGameTime()), 0.5F);
+                ms.translate(0.5F, 0.95 + 0.015 * Math.cos(0.05f * partialTicks), 0.5F);
                 ms.mulPose(Axis.XN.rotationDegrees(90f));
-                ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(te.getLevel().getGameTime() / 11.5f))));
-                ms.mulPose(Axis.ZN.rotationDegrees(te.getLevel().getGameTime() / 1.8525f));
+                ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(partialTicks / 11.5f))));
+                ms.mulPose(Axis.ZN.rotationDegrees(partialTicks / 1.8525f));
                 ms.scale(0.55f, 0.55f, 0.55f);
                 Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight,
                         combinedOverlay, ms, buffer, te.getLevel(), 0);

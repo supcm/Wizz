@@ -19,7 +19,7 @@ import java.util.List;
 
 public class WisdomSeedItem extends Item {
     public WisdomSeedItem() {
-        super(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+        super(new Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
     }
     @Override public void appendHoverText(ItemStack stack, @Nullable Level world,
                                           List<Component> list, TooltipFlag flag) {

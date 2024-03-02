@@ -4,7 +4,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,10 +15,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.supcm.wizz.WizzMod;
 import net.supcm.wizz.common.enchantment.Enchantments;
 import net.supcm.wizz.common.handler.EnchantmentsHandler;
 import net.supcm.wizz.common.network.PacketHandler;
@@ -35,7 +31,7 @@ public class CodexItem extends Item {
         this(0);
     }
     protected CodexItem(int type) {
-        super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+        super(new Properties().stacksTo(1).rarity(Rarity.EPIC));
         this.type = type;
     }
     @Override public boolean isFoil(ItemStack stack) {return true;}

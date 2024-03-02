@@ -9,15 +9,12 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.supcm.wizz.WizzMod;
-import net.supcm.wizz.common.block.Blocks;
 import net.supcm.wizz.common.item.Items;
-import net.supcm.wizz.data.recipes.ConceptRecipe;
 import net.supcm.wizz.data.recipes.GrindingRecipe;
 
 public class GrindingCategory implements IRecipeCategory<GrindingRecipe> {

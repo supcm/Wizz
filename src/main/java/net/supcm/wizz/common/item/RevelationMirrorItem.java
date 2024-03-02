@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 
 public class RevelationMirrorItem extends Item {
     public RevelationMirrorItem() {
-        super(new Item.Properties().stacksTo(1).setNoRepair().rarity(Rarity.RARE));
+        super(new Properties().stacksTo(1).setNoRepair().rarity(Rarity.RARE));
     }
 
     @Override public void inventoryTick(ItemStack stack, Level level, Entity entity, int tick, boolean flag) {

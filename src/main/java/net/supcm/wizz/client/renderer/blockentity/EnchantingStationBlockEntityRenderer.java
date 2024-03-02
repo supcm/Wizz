@@ -3,17 +3,13 @@ package net.supcm.wizz.client.renderer.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.supcm.wizz.common.block.entity.EnchantedTableBlockEntity;
 import net.supcm.wizz.common.block.entity.EnchantingStationBlockEntity;
 import net.supcm.wizz.common.item.Items;
-import org.joml.Matrix4f;
 
 public class EnchantingStationBlockEntityRenderer implements BlockEntityRenderer<EnchantingStationBlockEntity> {
     float s = 0.55F;
@@ -31,10 +27,10 @@ public class EnchantingStationBlockEntityRenderer implements BlockEntityRenderer
         ItemStack stack1 = te.handler.getStackInSlot(1);
         if(!stack.isEmpty()){
             ms.pushPose();
-            ms.translate(0.5F, 1.15 + 0.025 * Math.cos(0.05f * te.getLevel().getGameTime()), 0.5F);
+            ms.translate(0.5F, 1.15 + 0.025 * Math.cos(0.05f * partialTicks), 0.5F);
             ms.mulPose(Axis.XN.rotationDegrees(90f));
-            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.cos(te.getLevel().getGameTime() / 8.5f))));
-            ms.mulPose(Axis.ZN.rotationDegrees(te.getLevel().getGameTime() / -0.9525f));
+            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.cos(partialTicks / 8.5f))));
+            ms.mulPose(Axis.ZN.rotationDegrees(partialTicks / -0.9525f));
             float s = 0.55f;
             ms.scale(s, s, s);
             Minecraft.getInstance().getItemRenderer().renderStatic(stack,
@@ -42,7 +38,6 @@ public class EnchantingStationBlockEntityRenderer implements BlockEntityRenderer
             ms.popPose();
         }
         if(!stack1.isEmpty() || te.tick != 0) {
-            double time = te.getLevel().getGameTime() + partialTicks;
             float[] angles = new float[stack1.getCount()];
             float anglePer = 360F / stack1.getCount();
             float totalAngle = 0F;
@@ -53,10 +48,10 @@ public class EnchantingStationBlockEntityRenderer implements BlockEntityRenderer
                 ms.pushPose();
                 ms.translate(0.5F, 0.95F, 0.5F);
                 if(te.doCraft) {
-                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + (float)time)+20*(te.tick*0.12525f)));
+                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + partialTicks)+20*(te.tick*0.12525f)));
                     ms.translate(1.45F-(te.tick*0.012525f), 0F, 0.25F);
                 } else {
-                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + (float) time) + 50));
+                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + partialTicks) + 50));
                     ms.translate(1.45F, 0F, 0.25F);
                 }
                 ms.mulPose(Axis.YP.rotationDegrees(90F));;

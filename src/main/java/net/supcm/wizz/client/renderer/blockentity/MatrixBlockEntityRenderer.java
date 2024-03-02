@@ -28,9 +28,9 @@ public class MatrixBlockEntityRenderer implements BlockEntityRenderer<MatrixBloc
         if(!tile.handler.getStackInSlot(0).isEmpty()) {
             ItemStack stack = tile.handler.getStackInSlot(0);
             ms.pushPose();
-            ms.translate(0.5, 1.16 + 0.02 * Math.sin(0.03f*tile.getLevel().getGameTime()), 0.5);
+            ms.translate(0.5, 1.16 + 0.02 * Math.sin(0.03f*partialTicks), 0.5);
             ms.mulPose(Axis.XN.rotationDegrees(90f));
-            ms.mulPose(Axis.ZN.rotationDegrees(tile.getLevel().getGameTime()/(0.625123f)));
+            ms.mulPose(Axis.ZN.rotationDegrees(partialTicks/0.625123f));
             ms.scale(0.45f, 0.45f, 0.45f);
             Minecraft.getInstance().getItemRenderer().
                     renderStatic(stack, ItemDisplayContext.FIXED, combinedLight,
@@ -41,7 +41,7 @@ public class MatrixBlockEntityRenderer implements BlockEntityRenderer<MatrixBloc
                 ms.pushPose();
                 ms.translate(0.5, 1.35-((tile.renderTick/3.125)* 0.01), 0.5);
                 ms.mulPose(Axis.XN.rotationDegrees(90f));
-                ms.mulPose(Axis.ZN.rotationDegrees(-tile.getLevel().getGameTime()/(0.625123f)));
+                ms.mulPose(Axis.ZN.rotationDegrees(partialTicks/0.625123f));
                 ms.scale(0.3f, 0.3f, 0.3f);
                 Minecraft.getInstance().getItemRenderer().
                         renderStatic(crystal, ItemDisplayContext.FIXED, combinedLight,

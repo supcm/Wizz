@@ -11,7 +11,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -235,5 +234,9 @@ public class AlchemyCauldronBlockEntity extends BlockEntity {
             return flag;
         }
         return false;
+    }
+
+    public int getStepsCount() {
+        return steps.size();
     }
 }

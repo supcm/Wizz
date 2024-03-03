@@ -38,6 +38,7 @@ public class WordForgeBlockEntityRenderer implements BlockEntityRenderer<WordFor
         ItemStack stack = te.handler.getStackInSlot(0);
         ItemStack stack1 = te.handler.getStackInSlot(1);
         ItemStack stack2 = te.handler.getStackInSlot(2);
+        float time = te.getLevel().getGameTime() + partialTicks;
         /*TODO 1.1: fix no warranty on client
         if(te.warranty) {
             renderEffect(ms, buffer, te, 1, 0.23f, 0.23f);
@@ -61,10 +62,10 @@ public class WordForgeBlockEntityRenderer implements BlockEntityRenderer<WordFor
             }
             if (!stack.isEmpty()) {
                 ms.pushPose();
-                ms.translate(0.5F, 1.46 + 0.03 * Math.cos(0.05f * partialTicks), 0.5F);
+                ms.translate(0.5F, 1.46 + 0.03 * Math.cos(0.05f * time), 0.5F);
                 ms.mulPose(Axis.XN.rotationDegrees(90f));
-                ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(partialTicks / 12.5f))));
-                ms.mulPose(Axis.ZN.rotationDegrees(-partialTicks / 0.325f));
+                ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(time / 12.5f))));
+                ms.mulPose(Axis.ZN.rotationDegrees(-time / 0.325f));
                 ms.scale(s, s, s);
                 Minecraft.getInstance().getItemRenderer().
                         renderStatic(stack, ItemDisplayContext.FIXED, combinedLight,
@@ -73,10 +74,10 @@ public class WordForgeBlockEntityRenderer implements BlockEntityRenderer<WordFor
             }
             if (!stack1.isEmpty()) {
                 ms.pushPose();
-                ms.translate(0.5F, 1.32 + 0.02 * Math.sin(0.03f * partialTicks), 0.5F);
+                ms.translate(0.5F, 1.32 + 0.02 * Math.sin(0.03f * time), 0.5F);
                 ms.mulPose(Axis.XN.rotationDegrees(90f));
-                ms.mulPose(Axis.YN.rotationDegrees((float) (3.75f * Math.cos(partialTicks / 12.5f))));
-                ms.mulPose(Axis.ZN.rotationDegrees(partialTicks / 0.625f));
+                ms.mulPose(Axis.YN.rotationDegrees((float) (3.75f * Math.cos(time / 12.5f))));
+                ms.mulPose(Axis.ZN.rotationDegrees(time / 0.625f));
                 ms.scale(s, s, s);
                 Minecraft.getInstance().getItemRenderer().
                         renderStatic(stack1, ItemDisplayContext.FIXED, combinedLight,
@@ -85,10 +86,10 @@ public class WordForgeBlockEntityRenderer implements BlockEntityRenderer<WordFor
             }
             if (!stack2.isEmpty()) {
                 ms.pushPose();
-                ms.translate(0.5F, 1.23 + 0.02 * Math.sin(0.03f * partialTicks), 0.5F);
+                ms.translate(0.5F, 1.23 + 0.02 * Math.sin(0.03f * time), 0.5F);
                 ms.mulPose(Axis.XN.rotationDegrees(90f));
-                ms.mulPose(Axis.YN.rotationDegrees((float) (-1.75f * Math.sin(partialTicks / 8.5f))));
-                ms.mulPose(Axis.ZN.rotationDegrees(partialTicks / 1.125f));
+                ms.mulPose(Axis.YN.rotationDegrees((float) (-1.75f * Math.sin(time / 8.5f))));
+                ms.mulPose(Axis.ZN.rotationDegrees(time / 1.125f));
                 ms.scale(s, s, s);
                 Minecraft.getInstance().getItemRenderer().
                         renderStatic(stack2, ItemDisplayContext.FIXED, combinedLight,
@@ -108,7 +109,7 @@ public class WordForgeBlockEntityRenderer implements BlockEntityRenderer<WordFor
                 for (short i = 0; i < 9; i++) {
                     ms.pushPose();
                     ms.translate(0.5F, .35F, 0.5F);
-                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + (float) partialTicks) + 50));
+                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + (float) time) + 50));
                     ms.translate(0.925F, 0F, 0.25F);
                     ms.mulPose(Axis.YP.rotationDegrees(90F));
                     ItemStack render = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(
@@ -122,7 +123,7 @@ public class WordForgeBlockEntityRenderer implements BlockEntityRenderer<WordFor
                     if (!stack.isEmpty()) {
                         if (T2_LIST.contains(Items.getResourceLocation(stack.getItem()).getPath() + "_" +
                                 Items.getResourceLocation(render.getItem()).getPath()))
-                            ms.translate(0, 0.45 + 0.075 * Math.cos(partialTicks / 8.2), 0);
+                            ms.translate(0, 0.45 + 0.075 * Math.cos(time / 8.2), 0);
                     }
                     Minecraft.getInstance().getItemRenderer().renderStatic(render,
                             ItemDisplayContext.GROUND,
@@ -145,7 +146,7 @@ public class WordForgeBlockEntityRenderer implements BlockEntityRenderer<WordFor
                 for (short i = 0; i < c; i++) {
                     ms.pushPose();
                     ms.translate(0.5F, .35F, 0.5F);
-                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + partialTicks) + 50));
+                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + time) + 50));
                     ms.translate(0.925F + (c * 0.025), 0F, 0.25F);
                     ms.mulPose(Axis.YP.rotationDegrees(90F));
                     String glyph2 = ((String)T3_LIST.stream().filter(string -> string.startsWith(
@@ -162,7 +163,7 @@ public class WordForgeBlockEntityRenderer implements BlockEntityRenderer<WordFor
                         ms.mulPose(Axis.ZP.rotationDegrees((float) (3.75f * Math.cos((te.getLevel().getGameTime() / 12.5f)))));
                     else
                         ms.mulPose(Axis.ZP.rotationDegrees((float) (-2.15f * Math.sin((te.getLevel().getGameTime() / 4.5f)))));
-                    ms.translate(0, 1.15 + 0.075 * Math.cos(partialTicks / 8.2), 0);
+                    ms.translate(0, 1.15 + 0.075 * Math.cos(time / 8.2), 0);
                     ms.pushPose();
                     ms.translate(0, 0.25, 0.15);
                     Minecraft.getInstance().getItemRenderer().renderStatic(render1,

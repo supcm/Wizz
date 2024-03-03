@@ -28,6 +28,7 @@ public class WordMachineBlockEntityRenderer implements BlockEntityRenderer<WordM
     }
     @Override public void render(WordMachineBlockEntity te, float partialTicks, PoseStack ms,
                                  MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+        float time = te.getLevel().getGameTime() + partialTicks;
         ItemStack stack = te.handler.getStackInSlot(0);
         ItemStack stack1 = te.handler.getStackInSlot(1);
         float[] angles = new float[9];
@@ -54,10 +55,10 @@ public class WordMachineBlockEntityRenderer implements BlockEntityRenderer<WordM
         }
         if(!stack.isEmpty()) {
             ms.pushPose();
-            ms.translate(0.5F, 1.36+0.03*Math.cos(0.05f * partialTicks), 0.5F);
+            ms.translate(0.5F, 1.36+0.03*Math.cos(0.05f * time), 0.5F);
             ms.mulPose(Axis.XN.rotationDegrees(90f));
-            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f*Math.sin(partialTicks / 12.5f))));
-            ms.mulPose(Axis.ZN.rotationDegrees(-partialTicks / 1.125f));
+            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f*Math.sin(time / 12.5f))));
+            ms.mulPose(Axis.ZN.rotationDegrees(-time / 1.125f));
             float s = 0.55F;
             ms.scale(s, s, s);
             Minecraft.getInstance().getItemRenderer().
@@ -67,10 +68,10 @@ public class WordMachineBlockEntityRenderer implements BlockEntityRenderer<WordM
         }
         if(!stack1.isEmpty()) {
             ms.pushPose();
-            ms.translate(0.5F, 1.23 + 0.02 * Math.sin(0.03f * partialTicks), 0.5F);
+            ms.translate(0.5F, 1.23 + 0.02 * Math.sin(0.03f * time), 0.5F);
             ms.mulPose(Axis.XN.rotationDegrees(90f));
-            ms.mulPose(Axis.YN.rotationDegrees((float) (3.75f*Math.cos(partialTicks / 12.5f))));
-            ms.mulPose(Axis.ZN.rotationDegrees(partialTicks / 2.825f));
+            ms.mulPose(Axis.YN.rotationDegrees((float) (3.75f*Math.cos(time / 12.5f))));
+            ms.mulPose(Axis.ZN.rotationDegrees(time / 2.825f));
             float s = 0.55F;
             ms.scale(s, s, s);
             Minecraft.getInstance().getItemRenderer().
@@ -82,7 +83,7 @@ public class WordMachineBlockEntityRenderer implements BlockEntityRenderer<WordM
             for (short i = 0; i < 9; i++) {
                 ms.pushPose();
                 ms.translate(0.5F, .5F, 0.5F);
-                ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + partialTicks) + 50));
+                ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + time) + 50));
                 ms.translate(0.825F, 0F, 0.25F);
                 ms.mulPose(Axis.YP.rotationDegrees(90F));
                 ItemStack render = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(
@@ -90,12 +91,12 @@ public class WordMachineBlockEntityRenderer implements BlockEntityRenderer<WordM
                 float s = 0.9f;
                 ms.scale(s, s, s);
                 if(i % 2 == 0)
-                    ms.mulPose(Axis.ZP.rotationDegrees((float) (3.75f*Math.cos(partialTicks / 12.5f))));
+                    ms.mulPose(Axis.ZP.rotationDegrees((float) (3.75f*Math.cos(time / 12.5f))));
                 else
-                    ms.mulPose(Axis.XP.rotationDegrees((float) (2.15f*Math.sin(partialTicks / 4.5f))));
+                    ms.mulPose(Axis.XP.rotationDegrees((float) (2.15f*Math.sin(time / 4.5f))));
                 if (T2_LIST.contains(Items.getResourceLocation(stack.getItem()).getPath() + "_" +
                         Items.getResourceLocation(render.getItem()).getPath()))
-                    ms.translate(0, 1.05 + 0.075 * Math.cos(partialTicks / 8.2), 0);
+                    ms.translate(0, 1.05 + 0.075 * Math.cos(time / 8.2), 0);
                 Minecraft.getInstance().getItemRenderer().renderStatic(render,
                         ItemDisplayContext.GROUND, combinedLight, combinedOverlay, ms, buffer, te.getLevel(), 0);
                 ms.popPose();

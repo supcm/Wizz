@@ -36,12 +36,13 @@ public class ReassessmentPillarBlockEntityRenderer implements BlockEntityRendere
     @Override public void render(ReassessmentPillarBlockEntity te, float partialTicks, PoseStack ms,
                                  MultiBufferSource buffer, int combinedLight, int combinedOverlay ) {
         ItemStack stack = te.handler.getStackInSlot(0);
+        float time = te.getLevel().getGameTime() + partialTicks;
         if(!stack.isEmpty()) {
             ms.pushPose();
-            ms.translate(0.5F, 1.25 + 0.035 * Math.cos(0.05f * partialTicks), 0.5F);
-            ms.mulPose(Axis.YN.rotationDegrees(partialTicks / 0.8525f));
+            ms.translate(0.5F, 1.25 + 0.035 * Math.cos(0.05f * time), 0.5F);
+            ms.mulPose(Axis.YN.rotationDegrees(time / 0.8525f));
             ms.scale(s, s, s);
-            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(partialTicks / 12.5f))));
+            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(time / 12.5f))));
             Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight,
                     combinedOverlay, ms, buffer, te.getLevel(), 0);
             ms.popPose();
@@ -50,7 +51,7 @@ public class ReassessmentPillarBlockEntityRenderer implements BlockEntityRendere
                 ms.translate(0.5, 1.05, 0.5);
                 ms.mulPose(Axis.XN.rotationDegrees(180f));
                 ms.scale(0.75f, 0.75f, 0.75f);
-                renderEffect(ms, buffer,partialTicks,
+                renderEffect(ms, buffer, time,
                         ((Items.ConceptItem) stack.getItem()).getColor()[0],
                         ((Items.ConceptItem) stack.getItem()).getColor()[1],
                         ((Items.ConceptItem) stack.getItem()).getColor()[2]);

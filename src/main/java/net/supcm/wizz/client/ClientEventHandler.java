@@ -45,6 +45,8 @@ public class ClientEventHandler {
                     ReassessmentTableBlockEntityRenderer::new);
             e.registerBlockEntityRenderer(BlockEntities.ALCHEMY_CAULDRON.get(),
                     AlchemyCauldronBlockEntityRenderer::new);
+            /*e.registerBlockEntityRenderer(BlockEntities.WIZZ_TRANS.get(),
+                    WizzTransRenderer::new);*/
         }
 
         @SubscribeEvent

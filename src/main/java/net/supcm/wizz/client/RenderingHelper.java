@@ -11,11 +11,13 @@ import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.supcm.wizz.WizzMod;
+import net.supcm.wizz.common.item.CatsEyeItem;
 import org.joml.Matrix4f;
 
 import java.util.function.Function;
@@ -68,7 +70,6 @@ public class RenderingHelper {
                 combinedLight, tint);
         stack.popPose();
     }
-
     private static void drawVertex(VertexConsumer builder, PoseStack poseStack, float x, float y, float z, float u,
                                    float v, int packedLight, int color) {
         builder.vertex(poseStack.last().pose(), x, y, z)
@@ -86,5 +87,25 @@ public class RenderingHelper {
         drawVertex(builder, poseStack, x0, y1, z1, u0, v1, packedLight, color);
         drawVertex(builder, poseStack, x1, y1, z1, u1, v1, packedLight, color);
         drawVertex(builder, poseStack, x1, y0, z0, u1, v0, packedLight, color);
+    }
+
+    public static void drawWizz(PoseStack stack, MultiBufferSource buffer, float time,
+                                float x, float y, float z) {
+        if(canSeeWizz()) {
+            stack.pushPose();
+            VertexConsumer builder = buffer.getBuffer(RenderType.LINES);
+            builder.vertex(stack.last().pose(), 0.5f, 0.5f + 0.25f * Mth.sin(time / 12.5f), 0.5f)
+                    .color(0.9f, 0.5f, 0.5f, 1)
+                    .normal(x > 0 ? 1 : -1, 0, z > 0 ? 1 : -1)
+                    .endVertex();
+            builder.vertex(stack.last().pose(), x, y + 0.25f * Mth.cos(time / 25), z)
+                    .color(0.5f, 0.5f, 0.9f, 1)
+                    .normal(x > 0 ? -1 : 1, 0, z > 0 ? -1 : 1)
+                    .endVertex();
+            stack.popPose();
+        }
+    }
+    private static boolean canSeeWizz() {
+        return Minecraft.getInstance().player.getInventory().items.stream().anyMatch(stack -> stack.getItem() instanceof CatsEyeItem);
     }
 }

@@ -19,14 +19,15 @@ public class ThoughtLoomBlockEntityRenderer implements BlockEntityRenderer<Thoug
     @Override
     public void render(ThoughtLoomBlockEntity te, float partialTicks, PoseStack ms,
                        MultiBufferSource buffer, int light, int overlay) {
+        float time = te.getLevel().getGameTime() + partialTicks;
         ItemStack stack = te.handler.getStackInSlot(0);
         ItemStack stack1 = te.handler.getStackInSlot(1);
         ItemStack stack2 = te.handler.getStackInSlot(2);
         ItemStack stack3 = te.handler.getStackInSlot(3);
         if(!stack.isEmpty()) {
             ms.pushPose();
-            ms.translate(0.5, 1.25 + 0.015 * Math.cos(0.15f * partialTicks), 0.5);
-            ms.mulPose(Axis.YP.rotation(partialTicks / 24.8525f));
+            ms.translate(0.5, 1.25 + 0.015 * Math.cos(0.15f * time), 0.5);
+            ms.mulPose(Axis.YP.rotation(time / 24.8525f));
             ms.scale(0.85f, 0.85f, 0.85f);
             Minecraft.getInstance().getItemRenderer().
                     renderStatic(stack, ItemDisplayContext.GROUND, light,
@@ -36,7 +37,7 @@ public class ThoughtLoomBlockEntityRenderer implements BlockEntityRenderer<Thoug
         if(!stack1.isEmpty()) {
             ms.pushPose();
             ms.translate(0.5F, .5F, 0.5F);
-            ms.mulPose(Axis.YP.rotationDegrees((float)-(360 + 0.85 * partialTicks)));
+            ms.mulPose(Axis.YP.rotationDegrees((float)-(360 + 0.85 * time)));
             ms.translate(0.95F, 0F, 0.25F);
             ms.mulPose(Axis.YP.rotation(90f));
             ms.scale(0.65f, 0.65f, 0.65f);
@@ -48,7 +49,7 @@ public class ThoughtLoomBlockEntityRenderer implements BlockEntityRenderer<Thoug
         if(!stack2.isEmpty()) {
             ms.pushPose();
             ms.translate(0.5F, .65F, 0.5F);
-            ms.mulPose(Axis.YP.rotationDegrees((float)-(360 + 0.65 * partialTicks)));
+            ms.mulPose(Axis.YP.rotationDegrees((float)-(360 + 0.65 * time)));
             ms.translate(1.225F, 0F, 0.25F);
             ms.mulPose(Axis.YP.rotation(90f));
             ms.scale(0.65f, 0.65f, 0.65f);
@@ -60,7 +61,7 @@ public class ThoughtLoomBlockEntityRenderer implements BlockEntityRenderer<Thoug
         if(!stack3.isEmpty()) {
             ms.pushPose();
             ms.translate(0.5F, .85F, 0.5F);
-            ms.mulPose(Axis.YP.rotationDegrees((float)-(360 + 0.45 * partialTicks)));
+            ms.mulPose(Axis.YP.rotationDegrees((float)-(360 + 0.45 * time)));
             ms.translate(1.425F, 0F, 0.25F);
             ms.mulPose(Axis.YP.rotation(90f));
             ms.scale(0.65f, 0.65f, 0.65f);

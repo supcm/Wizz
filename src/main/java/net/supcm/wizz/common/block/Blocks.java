@@ -36,6 +36,8 @@ public class Blocks {
             () -> new Block(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.DEEPSLATE)
                     .strength(3.0f, 3.0f)
                     .requiresCorrectToolForDrops()), null, null, false);
+    /*public static final RegistryObject<Block> WIZZ_TRANS = createBlock("wizz_trans",
+            WizzTransBlock::new, null, null, true);*/
     public static final RegistryObject<Block> ENCHANTED_TABLE = createBlock("enchanted_table",
             EnchantedTableBlock::new, null, null, false);
     public static final RegistryObject<Block> WORD_MACHINE = createBlock("word_machine",

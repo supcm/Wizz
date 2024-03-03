@@ -28,6 +28,7 @@ public class ReassessmentTableBlockEntityRenderer implements BlockEntityRenderer
     }
     @Override public void render(ReassessmentTableBlockEntity te, float partialTicks, PoseStack ms,
                                  MultiBufferSource buffer, int combinedLight, int combinedOverlay ) {
+        float time = te.getLevel().getGameTime() + partialTicks;
         ms.pushPose();
         ms.translate(0.5, 1, 0.5);
         ms.mulPose(Axis.XN.rotationDegrees(90f));
@@ -40,10 +41,10 @@ public class ReassessmentTableBlockEntityRenderer implements BlockEntityRenderer
             ItemStack stack = te.handler.getStackInSlot(0);
             if (!stack.isEmpty()) {
                 ms.pushPose();
-                ms.translate(0.5F, 0.95 + 0.015 * Math.cos(0.05f * partialTicks), 0.5F);
+                ms.translate(0.5F, 0.95 + 0.015 * Math.cos(0.05f * time), 0.5F);
                 ms.mulPose(Axis.XN.rotationDegrees(90f));
-                ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(partialTicks / 11.5f))));
-                ms.mulPose(Axis.ZN.rotationDegrees(partialTicks / 1.8525f));
+                ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.sin(time / 11.5f))));
+                ms.mulPose(Axis.ZN.rotationDegrees(time / 1.8525f));
                 ms.scale(0.55f, 0.55f, 0.55f);
                 Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight,
                         combinedOverlay, ms, buffer, te.getLevel(), 0);

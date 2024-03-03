@@ -44,4 +44,7 @@ public class BlockEntities {
     public static final RegistryObject<BlockEntityType<MortarBlockEntity>> MORTAR =
             BLOCK_ENTITIES.register("mortar", () -> BlockEntityType.Builder.of(MortarBlockEntity::new,
                     Blocks.MORTAR.get()).build(null));
+    /*public static final RegistryObject<BlockEntityType<WizzTransBlockEntity>> WIZZ_TRANS =
+            BLOCK_ENTITIES.register("wizz_trans", () -> BlockEntityType.Builder.of(WizzTransBlockEntity::new,
+                    Blocks.WIZZ_TRANS.get()).build(null));*/
 }

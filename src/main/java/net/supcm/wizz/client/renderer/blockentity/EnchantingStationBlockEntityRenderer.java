@@ -19,6 +19,7 @@ public class EnchantingStationBlockEntityRenderer implements BlockEntityRenderer
     @Override
     public void render(EnchantingStationBlockEntity te, float partialTicks, PoseStack ms,
                        MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+        float time = te.getLevel().getGameTime() + partialTicks;
         renderCrystal(te, ms, 0.25f, 0.25f, combinedLight, combinedOverlay, buffer);
         renderCrystal(te, ms, 1-0.25f, 0.25f, combinedLight, combinedOverlay, buffer);
         renderCrystal(te, ms, 0.25f, 1-0.25f, combinedLight, combinedOverlay, buffer);
@@ -27,10 +28,10 @@ public class EnchantingStationBlockEntityRenderer implements BlockEntityRenderer
         ItemStack stack1 = te.handler.getStackInSlot(1);
         if(!stack.isEmpty()){
             ms.pushPose();
-            ms.translate(0.5F, 1.15 + 0.025 * Math.cos(0.05f * partialTicks), 0.5F);
+            ms.translate(0.5F, 1.15 + 0.025 * Math.cos(0.05f * time), 0.5F);
             ms.mulPose(Axis.XN.rotationDegrees(90f));
-            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.cos(partialTicks / 8.5f))));
-            ms.mulPose(Axis.ZN.rotationDegrees(partialTicks / -0.9525f));
+            ms.mulPose(Axis.XN.rotationDegrees((float) (3.75f * Math.cos(time / 8.5f))));
+            ms.mulPose(Axis.ZN.rotationDegrees(time / -0.9525f));
             float s = 0.55f;
             ms.scale(s, s, s);
             Minecraft.getInstance().getItemRenderer().renderStatic(stack,
@@ -48,10 +49,10 @@ public class EnchantingStationBlockEntityRenderer implements BlockEntityRenderer
                 ms.pushPose();
                 ms.translate(0.5F, 0.95F, 0.5F);
                 if(te.doCraft) {
-                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + partialTicks)+20*(te.tick*0.12525f)));
+                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + time)+20*(te.tick*0.12525f)));
                     ms.translate(1.45F-(te.tick*0.012525f), 0F, 0.25F);
                 } else {
-                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + partialTicks) + 50));
+                    ms.mulPose(Axis.YP.rotationDegrees(-(angles[i] + time) + 50));
                     ms.translate(1.45F, 0F, 0.25F);
                 }
                 ms.mulPose(Axis.YP.rotationDegrees(90F));;
